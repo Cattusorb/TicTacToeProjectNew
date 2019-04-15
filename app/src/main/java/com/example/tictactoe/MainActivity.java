@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void play() {
 
-        Intent intent = new Intent(this, com.example.tictactoe2.game.class);
+        Intent intent = new Intent(this, com.example.tictactoe.game.class);
         startActivity(intent);
     }
 
