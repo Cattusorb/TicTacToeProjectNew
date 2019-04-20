@@ -22,19 +22,23 @@ public class Game extends AppCompatActivity {
     /** If its player one or player two's turn
      * if true then player one's turn
      * if false then player two's turn*/
-    private boolean turn = true;
+    private boolean turn;
 
     /** Number of turns that have gone by */
-    private int turnNumber = 0;
+    private int turnNumber;
 
     /**If the game has a winner then true, if not, then false */
-    private boolean winner = false;
+    private boolean winner;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+         turn = true;
+         turnNumber = 0;
+         winner = false;
 
         exit = findViewById(R.id.exit);
 
@@ -60,41 +64,38 @@ public class Game extends AppCompatActivity {
 
         turnNumber++;
 
-        if(turnNumber > 3) {
-            checkWin();
-        }
+       checkWin();
 
         // Player one's turn
         if (turn) {
             view.setBackgroundResource(R.drawable.x);
-            turn = false;
 
             for(int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
                     gamePlays[i] = 1;
                 }
             }
+
+            turn = false;
             view.setEnabled(false);
             output.setText("O's turn to play!");
+            checkWin();
         }
 
+        // Player two's turn
         if (!turn) {
             view.setBackgroundResource(R.drawable.o);
-            turn = true;
 
             for(int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
                     gamePlays[i] = 2;
                 }
             }
+            turn = true;
             view.setEnabled(false);
             output.setText("X's turn to play!");
-        }
-
-        if(turnNumber > 3) {
             checkWin();
         }
-
     }
 
     private void checkWin() {
