@@ -12,18 +12,6 @@ import java.util.ArrayList;
 
 public class game extends AppCompatActivity {
     private Button exit;
-    private ImageButton one;
-    private ImageButton two;
-    private ImageButton three;
-    private ImageButton four;
-    private ImageButton five;
-    private ImageButton six;
-    private ImageButton seven;
-    private ImageButton eight;
-    private ImageButton nine;
-
-
-    // Setup game
 
     /**
      * gamePlay is an array with 9 elements, one for each place in tictactoe
@@ -34,18 +22,18 @@ public class game extends AppCompatActivity {
     private int[] gamePlays = {0,0,0,0,0,0,0,0,0};
 
     /** ArrayList of the Image Buttons */
-    private ArrayList<ImageButton> numbers;
+    private ImageButton[] numbers = new ImageButton[9];
 
     /** If its player one or player two's turn
      * if true then player one's turn
      * if false then player two's turn*/
-    private boolean turn;
+    private boolean turn = true;
 
     /** Number of turns that have gone by */
-    private int turnNumber;
+    private int turnNumber = 0;
 
     /**If the game has a winner then true, if not, then false */
-    private boolean winner;
+    private boolean winner = false;
 
 
     @Override
@@ -53,30 +41,17 @@ public class game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        turn = true;
-        winner = false;
-        turnNumber = 0;
-
         exit = findViewById(R.id.exit);
-        one = findViewById(R.id.one);
-        two = findViewById(R.id.two);
-        three = findViewById(R.id.three);
-        four = findViewById(R.id.four);
-        five = findViewById(R.id.five);
-        six = findViewById(R.id.six);
-        seven = findViewById(R.id.seven);
-        eight = findViewById(R.id.eight);
-        nine = findViewById(R.id.nine);
+        numbers[0] = findViewById(R.id.one);
+        numbers[1] = findViewById(R.id.two);
+        numbers[2] = findViewById(R.id.three);
+        numbers[3] = findViewById(R.id.four);
+        numbers[4] = findViewById(R.id.five);
+        numbers[5] = findViewById(R.id.six);
+        numbers[6] = findViewById(R.id.seven);
+        numbers[7] = findViewById(R.id.eight);
+        numbers[8] = findViewById(R.id.nine);
 
-        numbers.add(one);
-        numbers.add(two);
-        numbers.add(three);
-        numbers.add(four);
-        numbers.add(five);
-        numbers.add(six);
-        numbers.add(seven);
-        numbers.add(eight);
-        numbers.add(nine);
     }
 
     public void buttonClick(View view) {
@@ -99,7 +74,7 @@ public class game extends AppCompatActivity {
             turn = false;
 
             for(int i = 0; i < 9; i++) {
-                if (view == numbers.get(i)) {
+                if (view == numbers[i]) {
                     gamePlays[i] = 1;
                 }
             }
@@ -112,7 +87,7 @@ public class game extends AppCompatActivity {
             turn = true;
 
             for(int i = 0; i < 9; i++) {
-                if (view == numbers.get(i)) {
+                if (view == numbers[i]) {
                     gamePlays[i] = 2;
                 }
             }
