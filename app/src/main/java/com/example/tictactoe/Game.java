@@ -1,16 +1,11 @@
 package com.example.tictactoe;
-
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class game extends AppCompatActivity {
+public class Game extends AppCompatActivity {
     private Button exit;
 
     /**
@@ -22,7 +17,7 @@ public class game extends AppCompatActivity {
     private int[] gamePlays = {0,0,0,0,0,0,0,0,0};
 
     /** ArrayList of the Image Buttons */
-    private ImageButton[] numbers = new ImageButton[9];
+    private View[] numbers = new View[9];
 
     /** If its player one or player two's turn
      * if true then player one's turn
@@ -42,6 +37,7 @@ public class game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         exit = findViewById(R.id.exit);
+
         numbers[0] = findViewById(R.id.one);
         numbers[1] = findViewById(R.id.two);
         numbers[2] = findViewById(R.id.three);

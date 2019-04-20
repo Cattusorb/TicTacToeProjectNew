@@ -4,12 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void play() {
 
-        Intent intent = new Intent(this, com.example.tictactoe.game.class);
+        Intent intent = new Intent(this, com.example.tictactoe.Game.class);
         startActivity(intent);
     }
 
