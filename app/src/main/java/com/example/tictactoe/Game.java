@@ -22,7 +22,7 @@ public class Game extends AppCompatActivity {
     /** If its player one or player two's turn
      * if true then player one's turn
      * if false then player two's turn*/
-    private boolean turn;
+    private int turn;
 
     /** Number of turns that have gone by */
     private int turnNumber;
@@ -36,7 +36,7 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-         turn = true;
+         turn = 1;
          turnNumber = 0;
          winner = false;
 
@@ -64,11 +64,9 @@ public class Game extends AppCompatActivity {
 
         turnNumber++;
 
-       checkWin();
-
         // Player one's turn
-        if (turn) {
-            view.setBackgroundResource(R.drawable.x);
+        if (turn == 1) {
+            view.setBackgroundResource(R.drawable.cat);
 
             for(int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
@@ -76,22 +74,22 @@ public class Game extends AppCompatActivity {
                 }
             }
 
-            turn = false;
+            turn = 2;
             view.setEnabled(false);
             output.setText("O's turn to play!");
             checkWin();
         }
 
         // Player two's turn
-        if (!turn) {
-            view.setBackgroundResource(R.drawable.o);
+        if (turn == 2) {
+            view.setBackgroundResource(R.drawable.dog);
 
             for(int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
                     gamePlays[i] = 2;
                 }
             }
-            turn = true;
+            turn = 1;
             view.setEnabled(false);
             output.setText("X's turn to play!");
             checkWin();
