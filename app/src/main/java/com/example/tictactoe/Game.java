@@ -48,24 +48,27 @@ public class Game extends AppCompatActivity {
         numbers[7] = findViewById(R.id.eight);
         numbers[8] = findViewById(R.id.nine);
 
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+        });
+
     }
 
     public void buttonClick(View view) {
 
         // Make a way to try again/play again
 
-        if(view == exit) {
-            // make this go back to the landing page
-            Intent intent = new Intent(this, com.example.tictactoe.MainActivity.class);
-            startActivity(intent);
-        }
 
         TextView output = findViewById(R.id.game_state);
 
         turnNumber++;
 
         // Player one's turn
-        if (turnNumber == 1 || turnNumber == 3 || turnNumber == 5 || turnNumber == 7 || turnNumber == 9) {
+        if (turnNumber % 2 == 1) {
             view.setBackgroundResource(R.drawable.cat);
 
             for(int i = 0; i < 9; i++) {
@@ -80,7 +83,7 @@ public class Game extends AppCompatActivity {
         }
 
         // Player two's turn
-        if (turnNumber == 2 || turnNumber == 4 || turnNumber == 6 || turnNumber == 8) {
+        if (turnNumber % 2 == 0) {
             view.setBackgroundResource(R.drawable.dog);
 
             for(int i = 0; i < 9; i++) {
