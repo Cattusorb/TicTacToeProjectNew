@@ -1,4 +1,5 @@
 package com.example.tictactoe;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,8 +52,12 @@ public class Game extends AppCompatActivity {
 
     public void buttonClick(View view) {
 
+        // Make a way to try again/play again
+
         if(view == exit) {
-            finish();
+            // make this go back to the landing page
+            Intent intent = new Intent(this, com.example.tictactoe.MainActivity.class);
+            startActivity(intent);
         }
 
         TextView output = findViewById(R.id.game_state);
@@ -102,34 +107,42 @@ public class Game extends AppCompatActivity {
         if (gamePlays[0] == 1 && gamePlays[1] == 1 && gamePlays[2] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[0] == 1 && gamePlays[3] == 1 && gamePlays[6] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[2] == 1 && gamePlays[5] == 1 && gamePlays[8] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[6] == 1 && gamePlays[7] == 1 && gamePlays[8] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[3] == 1 && gamePlays[4] == 1 && gamePlays[5] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[1] == 1 && gamePlays[4] == 1 && gamePlays[7] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[0] == 1 && gamePlays[4] == 1 && gamePlays[8] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[6] == 1 && gamePlays[4] == 1 && gamePlays[2] == 1) {
             output.setText("The winner is X!");
             winner = true;
+            disableTiles();
         }
     }
 
@@ -138,34 +151,42 @@ public class Game extends AppCompatActivity {
         if (gamePlays[0] == 2 &&  gamePlays[1] == 2 && gamePlays[2] == 2) {
             output.setText("The winner is 0!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[0] == 2 && gamePlays[3] == 2 && gamePlays[6] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[2] == 2 && gamePlays[5] == 2 && gamePlays[8] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[6] == 2 && gamePlays[7] == 2 && gamePlays[8] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[3] == 2 && gamePlays[4] == 2 && gamePlays[5] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[1] == 2 && gamePlays[4] == 2 && gamePlays[7] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[0] == 2 && gamePlays[4] == 2 && gamePlays[8] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
         if(gamePlays[6] == 2 && gamePlays[4] == 2 && gamePlays[2] == 2) {
             output.setText("The winner is O!");
             winner = true;
+            disableTiles();
         }
     }
 
@@ -174,6 +195,12 @@ public class Game extends AppCompatActivity {
         if(gamePlays[0] != 0 && gamePlays[1] != 0 && gamePlays[2] != 0 && gamePlays[3] != 0 && gamePlays[4] != 0
                 && gamePlays[5] != 0 && gamePlays[6] != 0 && gamePlays[7] != 0 && gamePlays[8] != 0 && !winner) {
             output.setText("Tie game!");
+        }
+    }
+
+    private void disableTiles() {
+        for(int i = 0; i < 9; i++) {
+            numbers[i].setEnabled(false);
         }
     }
 }
