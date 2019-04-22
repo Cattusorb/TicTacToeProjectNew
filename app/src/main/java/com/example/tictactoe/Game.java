@@ -1,10 +1,18 @@
 package com.example.tictactoe;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class Game extends AppCompatActivity {
     private Button exit;
@@ -27,16 +35,31 @@ public class Game extends AppCompatActivity {
     /**If the game has a winner then true, if not, then false */
     private boolean winner;
 
+    //---
+    /**If the game is in AI mode the set true in code*/
+    private boolean aiMode = true; //Only manually true for testing
+
+    /**Updates to have all possible moves if in AI mode*/
+    private List<View> unsetNumbers;
+
+    TextView output;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-         turnNumber = 0;
-         winner = false;
+        turnNumber = 0;
+        winner = false;
 
         exit = findViewById(R.id.exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         numbers[0] = findViewById(R.id.one);
         numbers[1] = findViewById(R.id.two);
@@ -48,47 +71,50 @@ public class Game extends AppCompatActivity {
         numbers[7] = findViewById(R.id.eight);
         numbers[8] = findViewById(R.id.nine);
 
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-            }
-        });
-
+        unsetNumbers = new LinkedList<>(Arrays.asList(numbers));
+        output = findViewById(R.id.game_state);
     }
 
     public void buttonClick(View view) {
 
         // Make a way to try again/play again
 
-
-        TextView output = findViewById(R.id.game_state);
-
         turnNumber++;
 
         // Player one's turn
-        if (turnNumber % 2 == 1) {
+        if ((turnNumber % 2) == 1) {
             view.setBackgroundResource(R.drawable.cat);
-
-            for(int i = 0; i < 9; i++) {
+            unsetNumbers.remove(view);
+            for (int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
                     gamePlays[i] = 1;
+                    unsetNumbers.remove(view);
                 }
             }
 
             view.setEnabled(false);
-            output.setText("O's turn to play!");
             checkWin();
-        }
+            if(aiMode == true && winner==false) {
+                output.setText("O's turn to play!");
 
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        aiEasyPlay();
+                    }
+                };
+                Handler hand = new Handler();
+                hand.postDelayed(r, 1000);
+            }
+        }
         // Player two's turn
-        if (turnNumber % 2 == 0) {
+        else if (((turnNumber % 2) == 0) && aiMode == false) {
             view.setBackgroundResource(R.drawable.dog);
 
-            for(int i = 0; i < 9; i++) {
+            for (int i = 0; i < 9; i++) {
                 if (view == numbers[i]) {
                     gamePlays[i] = 2;
+                    //unsetNumbers.remove(view);
                 }
             }
             view.setEnabled(false);
@@ -96,6 +122,7 @@ public class Game extends AppCompatActivity {
             checkWin();
         }
     }
+
 
     private void checkWin() {
         checkWinPlayerOne();
@@ -205,5 +232,24 @@ public class Game extends AppCompatActivity {
         for(int i = 0; i < 9; i++) {
             numbers[i].setEnabled(false);
         }
+    }
+
+        /*
+    By default player two is the AI in AI mode.
+    Easy mode: Choose random open game space.
+     */
+    private void aiEasyPlay() {
+        turnNumber++;
+        output.setText("X's turn to play!");
+        Collections.shuffle(unsetNumbers);
+        unsetNumbers.get(0).setBackgroundResource(R.drawable.dog);
+        unsetNumbers.get(0).setEnabled(false);
+        for (int i = 0; i < 9; i++) {
+            if (unsetNumbers.get(0) == numbers[i]) {
+                gamePlays[i] = 2;
+            }
+        }
+        unsetNumbers.remove(0);
+        checkWin();
     }
 }

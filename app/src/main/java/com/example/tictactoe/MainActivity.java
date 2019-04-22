@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         play = findViewById(R.id.pvp_mode);
 
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
