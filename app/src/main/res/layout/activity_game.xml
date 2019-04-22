@@ -104,7 +104,9 @@
         android:textSize="@dimen/button_text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/button_padding"/>
+        android:padding="@dimen/button_padding"
+        android:textColor="@color/text_color"
+        android:background="@color/landing_button"/>
 
 
 
