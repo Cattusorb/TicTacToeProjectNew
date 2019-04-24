@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button play;
+    private Button playPVPMode;
+    private Button playPVCMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,22 +18,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
-        play = findViewById(R.id.pvp_mode);
+        playPVPMode = findViewById(R.id.pvp_mode);
+        playPVCMode = findViewById(R.id.pvc_mode);
 
 
-        play.setOnClickListener(new View.OnClickListener() {
+        playPVPMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                play();
+                playPVP();
+            }
+        });
+
+        playPVCMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                playPVC();
             }
         });
     }
 
-    private void play() {
+    private void playPVP() {
 
-        Intent intent = new Intent(this, com.example.tictactoe.Game.class);
+        Intent intent = new Intent(this, com.example.tictactoe.PVP.class);
         startActivity(intent);
     }
+
+    private void playPVC() {
+
+        Intent intent = new Intent(this, com.example.tictactoe.Mode.class);
+        startActivity(intent);
+    }
+
+
 
 }
