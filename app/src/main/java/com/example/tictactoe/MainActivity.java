@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void playPVP() {
 
-        Intent intent = new Intent(this, com.example.tictactoe.PVP.class);
+        Intent intent = new Intent(this, com.example.tictactoe.GameActivity.class);
         startActivity(intent);
     }
 
     private void playPVC() {
 
-        Intent intent = new Intent(this, com.example.tictactoe.Mode.class);
+        Intent intent = new Intent(this, com.example.tictactoe.ModeActivity.class);
         startActivity(intent);
     }
 
