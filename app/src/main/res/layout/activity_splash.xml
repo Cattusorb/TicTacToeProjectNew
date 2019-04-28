@@ -21,7 +21,8 @@
         android:layout_margin="@dimen/margin"
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/text_color"
-        android:background="@color/landing_button" />
+        android:background="@color/landing_button"
+        android:onClick="buttonPlayPVP"/>
 
     <Button
         android:id="@+id/pvc_mode"
@@ -32,7 +33,8 @@
         android:layout_margin="@dimen/margin"
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/text_color"
-        android:background="@color/landing_button" />
+        android:background="@color/landing_button"
+        android:onClick="buttonPlayPVC"/>
     <Button
         android:id="@+id/settings"
         android:text="@string/settings"

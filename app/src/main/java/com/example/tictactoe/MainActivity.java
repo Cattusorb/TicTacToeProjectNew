@@ -4,48 +4,26 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button playPVPMode;
-    private Button playPVCMode;
+    public static final String EXTRA_MESSAGE = "com.example.tictactoe.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_splash);
 
-
-        playPVPMode = findViewById(R.id.pvp_mode);
-        playPVCMode = findViewById(R.id.pvc_mode);
-
-
-        playPVPMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                playPVP();
-            }
-        });
-
-        playPVCMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                playPVC();
-            }
-        });
     }
 
-    private void playPVP() {
+    public void buttonPlayPVP(View view) {
 
         Intent intent = new Intent(this, com.example.tictactoe.GameActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, "pvp");
         startActivity(intent);
     }
 
-    private void playPVC() {
+    public void buttonPlayPVC(View view) {
 
         Intent intent = new Intent(this, com.example.tictactoe.ModeActivity.class);
         startActivity(intent);

@@ -1,6 +1,9 @@
 package com.example.tictactoe;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,17 +15,17 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    private Button exit;
-
     /** Set based on mode */
     private Player playerOne;
-    /** Id for drawable for player one icon*/
-    private int idOne;
+    /** drawable for player one icon*/
+    private Drawable idOne;
+    private String iconNameOne;
 
     /** Set based on mode */
     private Player playerTwo;
-    /** Id for drawable for player two icon*/
-    private int idTwo;
+    /** drawable for player two icon*/
+    private Drawable idTwo;
+    private String iconNameTwo;
 
     /**
      * gamePlay is an array with 9 elements, one for each place in tictactoe
@@ -53,16 +56,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        Intent intent = getIntent();
+        String mode = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+
+        //To change later for custom icons
+        idOne = getResources().getDrawable(R.drawable.x);
+        idTwo = getResources().getDrawable(R.drawable.o);
+
+        // To change later based on a feature
+        iconNameOne = "X";
+        iconNameTwo = "O";
+
         turnNumber = 0;
         winner = false;
-
-        exit = findViewById(R.id.exit);
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         numbers[0] = findViewById(R.id.one);
         numbers[1] = findViewById(R.id.two);
@@ -76,6 +82,74 @@ public class GameActivity extends AppCompatActivity {
 
         unsetNumbers = new LinkedList<>(Arrays.asList(numbers));
         output = findViewById(R.id.game_state);
+
+        setPlayers(mode);
+    }
+
+    private void setPlayers(String mode) {
+
+        playerOne = new HumanPlayer();
+
+        if (mode.equals("pvp")) {
+             playerTwo = new HumanPlayer();
+         }
+         if (mode.equals("pvceasy")) {
+             playerTwo = new EasyPlayer();
+         }
+        if (mode.equals("pvcmed")) {
+            playerTwo = new MediumPlayer();
+        }
+        if (mode.equals("pvchard")) {
+            playerTwo = new HardPlayer();
+        }
+    }
+
+    public void buttonClick(View view) {
+        turnNumber++;
+
+        // X goes first
+
+        // Player one's turn
+        if ((turnNumber % 2) == 1) {
+            playerOne.move(idOne, view, getSpacesAvailable(), getGamePlays(), getNumbers());
+            unsetNumbers.remove(view);
+            for (int i = 0; i < 9; i++) {
+                if (view == numbers[i]) {
+                    gamePlays[i] = 1;
+                    unsetNumbers.remove(view);
+                }
+            }
+            output.setText(iconNameOne + "'s turn to play!");
+            checkWin();
+        }
+        // Player two's turn
+        if (((turnNumber % 2) == 0)) {
+            playerTwo.move(idTwo, view, getSpacesAvailable(), getGamePlays(), getNumbers());
+            for (int i = 0; i < 9; i++) {
+                if (view == numbers[i]) {
+                    gamePlays[i] = 2;
+                    unsetNumbers.remove(view);
+                }
+            }
+            output.setText(iconNameTwo + "'s turn to play!");
+            checkWin();
+        }
+    }
+
+    public List<View> getSpacesAvailable() {
+        return unsetNumbers;
+    }
+
+    public View[] getNumbers() {
+        return numbers;
+    }
+
+    public int[] getGamePlays() {
+        return gamePlays;
+    }
+
+    public void exitButton(View view) {
+        finish();
     }
 
     private void checkWin() {
@@ -182,9 +256,23 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Disables all tiles after there is a winner.
+     * Then runs the playAgain() method
+     */
     private void disableTiles() {
         for(int i = 0; i < 9; i++) {
             numbers[i].setEnabled(false);
         }
+
+        playAgain();
+    }
+
+    /**
+     * Method to ask the user if they want to play again,
+     * should bring up a button that asks if you want to play again
+     */
+    public void playAgain() {
+
     }
 }

@@ -232,6 +232,16 @@ public class Game extends AppCompatActivity {
         for(int i = 0; i < 9; i++) {
             numbers[i].setEnabled(false);
         }
+
+        playAgain();
+    }
+
+    /**
+     * Method to play again, should bring up a button
+     * that asks if you want to play again
+     */
+    public void playAgain() {
+
     }
 
         /*
