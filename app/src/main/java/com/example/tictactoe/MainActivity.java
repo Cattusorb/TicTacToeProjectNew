@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void info(View view) {
+        Intent intent = new Intent(this, com.example.tictactoe.InfoActivity.class);
+        startActivity(intent);
+    }
+
     public void closeGame(View view) {
         finish();
     }

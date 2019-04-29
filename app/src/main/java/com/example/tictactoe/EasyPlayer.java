@@ -8,20 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class EasyPlayer extends Player {
+    private List<View> spaces;
 
     @Override
-    public void move(Drawable id, View view, final List<View> spacesLeft, final int[] gamePlays, View[] tiles) {
-
-        final View[] nums = tiles;
-        final Drawable idThing = id;
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                aiPlay(spacesLeft, nums, gamePlays, idThing);
-            }
-        };
-        Handler hand = new Handler();
-        hand.postDelayed(r, 1000);
+    public void move(Drawable id, View view, List<View> spacesLeft, int[] gamePlays, View[] tiles) {
+        spaces = spacesLeft;
     }
 
     private void aiPlay(List<View> spacesLeft, View[] numbers, int[] gamePlays, Drawable id) {

@@ -15,5 +15,8 @@
 
     <string name="back_button">Back</string>
 
-    <string name="corp">SJR Enterprises CC</string>
+    <string name="about">Tic Tac Go is a variation on the game Tic Tac Toe or more generally known Xs and Os.
+                        The way to win in Tic Tac Go is simple, get three tiles in a row of the same kind.</string>
+
+    <string name="corp">SJR Enterprises</string>
 </resources>
