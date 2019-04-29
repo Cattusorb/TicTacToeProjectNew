@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void closeGame(View view) {
+        finish();
+    }
+
 
 
 }

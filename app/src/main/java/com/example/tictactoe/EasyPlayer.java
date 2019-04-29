@@ -13,10 +13,11 @@ public class EasyPlayer extends Player {
     public void move(Drawable id, View view, final List<View> spacesLeft, final int[] gamePlays, View[] tiles) {
 
         final View[] nums = tiles;
+        final Drawable idThing = id;
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                aiPlay(spacesLeft, nums, gamePlays, id);
+                aiPlay(spacesLeft, nums, gamePlays, idThing);
             }
         };
         Handler hand = new Handler();

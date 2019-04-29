@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
 
     <ImageView
         android:layout_width="@dimen/splash_image_w"
@@ -64,7 +65,8 @@
         android:layout_margin="@dimen/margin"
         android:textSize="@dimen/button_text_size"
         android:textColor="@color/text_color"
-        android:background="@color/landing_button" />
+        android:background="@color/landing_button"
+        android:onClick="closeGame"/>
 
     <TextView
         android:layout_width="wrap_content"
