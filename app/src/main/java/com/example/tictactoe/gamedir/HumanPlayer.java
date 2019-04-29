@@ -1,4 +1,4 @@
-package com.example.tictactoe.tictactoe;
+package com.example.tictactoe.gamedir;
 
 public abstract class HumanPlayer extends Player {
 
