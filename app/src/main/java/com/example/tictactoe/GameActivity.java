@@ -293,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
         for(int a = 0; a < 9; a++) {
             gamePlays[a] = 0;
             numbers[a].setEnabled(true);
-            numbers[a].setBackground(null);
+            numbers[a].setBackgroundResource(R.drawable.tile);
         }
 
         Toast.makeText(this, "New Game is Ready!", Toast.LENGTH_SHORT).show();
