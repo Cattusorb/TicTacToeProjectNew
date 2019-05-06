@@ -136,7 +136,13 @@ public class GameActivity extends AppCompatActivity {
                 view.setEnabled(false);
                 checkWin();
                 if(ai == true && winner==false) {
-                    aiPlay(); // this will change depending on the ai, make methods to do 
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            aiPlay();
+                        }
+                    }, 1000); // Millisecond 1000 = 1 sec
+                    // this will change depending on the ai, make methods to do
 			      // easy ai, med ai(can call hard and easy randomly) and hard ai. 
                 }
             }
