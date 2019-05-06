@@ -10,22 +10,22 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    /** Set based on mode */
-    private Player playerOne;
     /** drawable for player one icon*/
     private Drawable idOne;
     private String iconNameOne;
 
-    /** Set based on mode */
-    private Player playerTwo;
     /** drawable for player two icon*/
     private Drawable idTwo;
     private String iconNameTwo;
+
+    /** mode of the game, pvp, pvceasy, pvcmed, pvchard */
+    private String gamemode; 
 
     /**
      * gamePlay is an array with 9 elements, one for each place in tictactoe
@@ -47,6 +47,9 @@ public class GameActivity extends AppCompatActivity {
 
     /**Updates to have all possible moves if in AI mode*/
     private List<View> unsetNumbers;
+
+    /** true if ai mode is enabled, false if not. */ 
+    private boolean ai; 
 
     TextView output;
 
@@ -83,75 +86,79 @@ public class GameActivity extends AppCompatActivity {
         unsetNumbers = new LinkedList<>(Arrays.asList(numbers));
         output = findViewById(R.id.game_state);
 
-        setPlayers(mode);
+        setMode(mode);
     }
 
-    private void setPlayers(String mode) {
-
-        playerOne = new HumanPlayer();
+    /**  Method to set the mode for the game.  
+     * @param mode - String from the intent to tell which mode the user(s) picked
+     */
+    private void setMode(String mode) {
 
         if (mode.equals("pvp")) {
-             playerTwo = new HumanPlayer();
+             gamemode = mode; 
+	         ai = false;
          }
          if (mode.equals("pvceasy")) {
-             playerTwo = new EasyPlayer();
+             gamemode = mode; 
+             ai = true; 
          }
         if (mode.equals("pvcmed")) {
-            playerTwo = new MediumPlayer();
+            gamemode = mode; 
+             ai = true; 
         }
         if (mode.equals("pvchard")) {
-            playerTwo = new HardPlayer();
+            gamemode = mode; 
+             ai = true; 
         }
-    }
-
+}
+    /** Method to play a turn on the tictactoe board, once someone has 
+     * touched a tile, it will change to the players symbol accordingly.
+     */
     public void buttonClick(View view) {
-        turnNumber++;
 
-        // X goes first
+        // Make a way to try again/play again
 
-        // Player one's turn
-        if ((turnNumber % 2) == 1) {
-            playerOne.move(idOne, view, getSpacesAvailable(), getGamePlays(), getNumbers());
-            unsetNumbers.remove(view);
-            for (int i = 0; i < 9; i++) {
-                if (view == numbers[i]) {
-                    gamePlays[i] = 1;
-                    unsetNumbers.remove(view);
+            turnNumber++;
+
+            // Player one's turn
+            if ((turnNumber % 2) == 1) {
+                view.setBackgroundResource(R.drawable.x);
+                unsetNumbers.remove(view);
+                for (int i = 0; i < 9; i++) {
+                    if (view == numbers[i]) {
+                        gamePlays[i] = 1;
+                        unsetNumbers.remove(view);
+                    }
+                }
+                output.setText(iconNameTwo + "'s turn to play!");
+
+                view.setEnabled(false);
+                checkWin();
+                if(ai == true && winner==false) {
+                    aiPlay(); // this will change depending on the ai, make methods to do 
+			      // easy ai, med ai(can call hard and easy randomly) and hard ai. 
                 }
             }
-            output.setText(iconNameOne + "'s turn to play!");
-            checkWin();
-        }
-        // Player two's turn
-        if (((turnNumber % 2) == 0)) {
-            playerTwo.move(idTwo, view, getSpacesAvailable(), getGamePlays(), getNumbers());
-            for (int i = 0; i < 9; i++) {
-                if (view == numbers[i]) {
-                    gamePlays[i] = 2;
-                    unsetNumbers.remove(view);
+            // Player two's turn
+            else if (((turnNumber % 2) == 0) && ai == false) {
+                view.setBackgroundResource(R.drawable.o);
+
+                for (int i = 0; i < 9; i++) {
+                    if (view == numbers[i]) {
+                        gamePlays[i] = 2;
+                        //unsetNumbers.remove(view);
+                    }
                 }
+                view.setEnabled(false);
+                output.setText(iconNameOne + "'s turn to play!");
+                checkWin();
             }
-            output.setText(iconNameTwo + "'s turn to play!");
-            checkWin();
-        }
     }
 
-    public List<View> getSpacesAvailable() {
-        return unsetNumbers;
-    }
-
-    public View[] getNumbers() {
-        return numbers;
-    }
-
-    public int[] getGamePlays() {
-        return gamePlays;
-    }
-
-    public void exitButton(View view) {
-        finish();
-    }
-
+    /** Method to check who the winner is, upon finding out it will disable 
+     * all the tiles on the board that are not already and the output text will display 
+     * the winner
+     */ 
     private void checkWin() {
         checkWinPlayerOne();
 
@@ -256,23 +263,37 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Disables all tiles after there is a winner.
-     * Then runs the playAgain() method
-     */
+     /** This method disables all tiles on the board. */
     private void disableTiles() {
         for(int i = 0; i < 9; i++) {
             numbers[i].setEnabled(false);
         }
-
-        playAgain();
     }
 
-    /**
-     * Method to ask the user if they want to play again,
-     * should bring up a button that asks if you want to play again
+    /** Exit Button Method, takes the user back one screen.  
+     * @param view - view that the input game from
      */
-    public void playAgain() {
+    private void exit(View view) {
+	// Make sure that exit button in the activity_game.xml has an onClick of exit.
+        finish(); 
+    }
 
+    /*
+    By default player two is the AI in AI mode.
+    Easy mode: Choose random open game space.
+     */
+    private void aiPlay() {
+        turnNumber++;
+        Collections.shuffle(unsetNumbers);
+        unsetNumbers.get(0).setBackgroundResource(R.drawable.o);
+        unsetNumbers.get(0).setEnabled(false);
+        for (int i = 0; i < 9; i++) {
+            if (unsetNumbers.get(0) == numbers[i]) {
+                gamePlays[i] = 2;
+            }
+        }
+        unsetNumbers.remove(0);
+        checkWin();
+        output.setText(iconNameOne + "'s turn to play!");
     }
 }

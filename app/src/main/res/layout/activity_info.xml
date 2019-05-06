@@ -8,6 +8,12 @@
     android:background="@color/background_color"
     tools:context=".InfoActivity">
 
+    <ImageView
+        android:layout_width="@dimen/splash_image_w"
+        android:layout_height="@dimen/splash_image_h"
+        android:layout_gravity="center"
+        android:background="@drawable/board"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,11 +21,14 @@
         android:textSize="@dimen/button_text_size"
         android:layout_gravity="center"
         android:textColor="@color/text_color"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/info_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about"
         android:textSize="@dimen/button_text_size"
         android:layout_gravity="center"
         android:textColor="@color/text_color"/>
@@ -43,5 +52,6 @@
         android:textSize="@dimen/button_text_size"
         android:layout_gravity="center"
         android:textColor="@color/text_color"/>
+</ScrollView>
 
 </LinearLayout>
