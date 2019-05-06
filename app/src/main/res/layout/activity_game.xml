@@ -17,7 +17,7 @@
             android:id="@+id/one"
             android:layout_width="@dimen/image_button_h_w"
             android:layout_height="@dimen/image_button_h_w"
-            android:onClick="buttonClick"/>
+            android:onClick="buttonClick" />
 
         <ImageButton
             android:id="@+id/two"
@@ -35,27 +35,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <ImageButton
             android:id="@+id/four"
             android:layout_width="@dimen/image_button_h_w"
             android:layout_height="@dimen/image_button_h_w"
-            android:onClick="buttonClick"/>
+            android:onClick="buttonClick" />
 
         <ImageButton
             android:id="@+id/five"
             android:layout_width="@dimen/image_button_h_w"
             android:layout_height="@dimen/image_button_h_w"
-            android:onClick="buttonClick"/>
+            android:onClick="buttonClick" />
 
         <ImageButton
             android:id="@+id/six"
             android:layout_width="@dimen/image_button_h_w"
             android:layout_height="@dimen/image_button_h_w"
-            android:onClick="buttonClick"/>
+            android:onClick="buttonClick" />
 
 
     </LinearLayout>
@@ -97,18 +97,33 @@
         android:textSize="@dimen/button_text_size"/>
 
     <Button
-        android:id="@+id/exit"
-        android:onClick="exit"
+        android:id="@+id/restart"
+        android:onClick="resetGame"
         android:layout_marginTop="@dimen/margin"
         android:layout_margin="@dimen/margin"
         android:layout_gravity="center"
-        android:text="@string/exit"
+        android:text="@string/reset_button"
         android:textSize="@dimen/button_text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/button_padding"
         android:textColor="@color/text_color"
         android:background="@color/landing_button"/>
+
+    <Button
+        android:id="@+id/exit"
+        android:onClick="exit"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_margin="@dimen/margin"
+        android:layout_gravity="center"
+        android:text="@string/back_button"
+        android:textSize="@dimen/button_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/button_padding"
+        android:textColor="@color/text_color"
+        android:background="@color/landing_button"/>
+
 
 
 

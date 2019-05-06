@@ -14,8 +14,12 @@
     <string name="hard">Hard Mode</string>
 
     <string name="back_button">Back</string>
+    <string name="reset_button">Reset Board</string>
 
-    <string name="about">TicTacGo!</string>
+    <string name="about">TicTacGo! is an android variation on the classic game Tic-Tac-Toe or more generally known, Xs and Os.
+    The goal of the game is to get either three Xs or Os in a row depending on what player you are, and to prevent the other player from
+    getting three in a row. There are three output messages you may encounter: "X wins!", "O wins!", "Tie game!". We hope that this version of
+    TicTacGo! is fun and that you can share the fun with your friends!</string>
 
     <string name="corp">SJR Enterprises</string>
 </resources>

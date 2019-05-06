@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -273,9 +274,23 @@ public class GameActivity extends AppCompatActivity {
     /** Exit Button Method, takes the user back one screen.  
      * @param view - view that the input game from
      */
-    private void exit(View view) {
+    public void exit(View view) {
 	// Make sure that exit button in the activity_game.xml has an onClick of exit.
         finish(); 
+    }
+
+    public void resetGame(View view) {
+        turnNumber = 0;
+        unsetNumbers = new LinkedList<>(Arrays.asList(numbers));
+        winner = false;
+
+        for(int a = 0; a < 9; a++) {
+            gamePlays[a] = 0;
+            numbers[a].setEnabled(true);
+            numbers[a].setBackground(null);
+        }
+
+        Toast.makeText(this, "New Game is Ready!", Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -293,7 +308,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         unsetNumbers.remove(0);
-        checkWin();
         output.setText(iconNameOne + "'s turn to play!");
+        checkWin();
     }
 }

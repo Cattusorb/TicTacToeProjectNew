@@ -1,7 +1,0 @@
-Tic Tac Go is a android variation on the game Tic Tac Toe or more generally known Xs and Os.
-The way to win in Tic Tac Go is simple, get three Xs or Os in a row depending on what side you are playing.
-The goal of the game is also to prevent the opponent from getting three in a row as well.
-Each player will take turns placing their tile until either player X or player O gets three in a row, or
-all the spaces in the 3x3 grid are filled, this will result in a tie.
-Upon completion of a game of TicTacGo! you will see displayed either "X wins!", "O wins!", or "Tie game!". After this happens
-you will have the ability to click "back to home", or "rematch".
