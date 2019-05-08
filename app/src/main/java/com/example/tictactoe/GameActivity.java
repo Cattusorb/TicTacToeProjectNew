@@ -2,6 +2,7 @@ package com.example.tictactoe;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
+
+    // Sound effects
+    MediaPlayer tieSound;
+    MediaPlayer winSound;
+    MediaPlayer loseSound;
 
     /** drawable for player one icon*/
     private Drawable idOne;
@@ -59,6 +65,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Initialize Sound effects
+        // = MediaPlayer.create(this, R.raw.bruh);
+        // to play the sound, do sound.start();
 
         Intent intent = getIntent();
         String mode = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
